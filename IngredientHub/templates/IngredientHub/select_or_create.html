@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% comment %} <div style="background-color:beige; width: 23.33%; float:right;"></div> {% endcomment %}
+<div style= "width: 23.33%; float:left; display: flex; flex-direction: column; justify-content: center; height: 50vh;">
+    <div></div>
+    <div class="table add-row" style="margin-left: auto; margin-right: auto;">
+        <table>
+            <tr>
+                <td>
+                    <button hx-get="{% url 'IngredientHub:select' year=year month_name=month_name %}?day={{ day }}" hx-target="#select_or_create">
+                        Go Select recipe
+                    </button>
+                    <p> or </p>
+                    <label>Create recipe :</label>
+                    <select name="Create_recipe" hx-get="{% url 'IngredientHub:recipe' year=year month_name=month_name %}?day={{ day }}" hx-target="#select_or_create">
+                        <option value="select">- select -</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div></div>
+</div>
+<div id="select_or_create" style="width: 76.66%; margin: 0 auto; text-align: center;">
+    {% if Create_recipe %}
+        {% include "IngredientHub/create_recipe.html" %}
+    {% else %}
+        {% include "IngredientHub/blank.html" %}
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+{% load recipe %}
+
+
+<section id="left-section">
+    <br>
+    <form style="display: flex; justify-content: flex-end; padding: 10px 30px;">
+        <input type="text" name="productname" placeholder="Enter a product name"/>
+        <button hx-post="{% url 'IngredientHub:search' year=year month_name=month_name %}?day={{ day }}" hx-target="#searchdisplay" type='submit'>Search Product</button>
+    </form>
+    <div id="searchdisplay" style="display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end;">
+        {% include "partials/search_display.html" %}
+    </div>
+</section>
+<section id="middle-section">
+    <div style="padding: 10px 0; margin: 20px 0;" >
+        {{ year }} | {{ month_name }} | {{ day }}
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+        <form hx-post="{% url 'IngredientHub:recipe' year=year month_name=month_name %}?day={{ day }}">
+            {% csrf_token %}
+                    <div class="fieldWrapper" style="text-align: left;">
+                        <table style="margin: auto;">
+                            {% for field in form %}
+                                <tr>
+                                    <td>{{ field.label_tag }}</td>
+                                    <td>{{ field }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                        <div>
+                            <p>- Category -</p>
+                            {% if categories %}
+                                <table class="table custom-table">
+                                    {% for row in categories|chunks:3 %}
+                                        <tr style="text-align: left;">
+                                            {% for category in row %}
+                                                <td margin= "10px 0;" padding="10px;">
+                                                    <a href="#" hx-get="{% url 'IngredientHub:cat' year=year month_name=month_name %}?day={{ day }}&Create_recipe={{ selected_meal_module }}&cat_id={{ category.id }}" hx-target="#displaysub">{{ category.name }}</a>
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% else %}
+                                <p>No category</p>
+                            {% endif %}
+                        </div>
+                        <div id="displaysub">
+                            {% include "partials/select_cat.html" %} 
+                        </div> 
+                        <div id="displayproduct">
+                            {% include "partials/select_sub.html" %}
+                        </div> 
+                    <br><br>
+                    <div id="container">
+                        {% include "partials/added_products_list.html" %}
+                    </div>
+                <div style="padding: 20px 0; margin: 20px 0;">
+                    <input type='submit' value='Submit'>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</section>
+<section id="right-section"></section>
+
+

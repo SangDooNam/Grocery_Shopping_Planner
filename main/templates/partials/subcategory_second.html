@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <select name="select_subcategory" id="selectsubcategory" hx-get="{% url 'main:partialproduct' %}" hx-target='#selected_product'>
+            <option selected>Choose a subcategory to select product</option>
+            {% for category in selected_subcategories_sec %}
+                <option value="{{ category.id }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <div id="selected_product">
+        {% include 'partials/product.html' %}
+    </div>
+</div>

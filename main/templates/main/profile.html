@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div id ='refresh'>
+<section id="left-section">
+    <div>
+        <p><strong> List of your recipes </strong></p>
+        {% if recipes %}
+        <table>
+            <tr>
+                <th> Recipe name </th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for recipe in recipes %}
+            <tr id="recipe-row-{{ recipe.id }}">
+                <td>{{ recipe }}</td>
+                <td><button><a href="{% url 'IngredientHub:update_recipe' rec_id=recipe.id %}">Edit</a></button></td>
+                <td><button hx-delete="{% url 'main:profile' %}?rec_id={{ recipe.id }}" hx-target="#refresh">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>You don't have any recipe yet.</p>
+        {% endif %}
+        <br><br>
+        <div>
+        <button><a href="{% url 'main:customize' %}">Click to customize product data.</a></button>
+        </div>
+    </div>
+</section>
+<section id="middle-section">
+    <div style="text-align: center;">
+        <h3>{{ profile.username|capfirst }}</h3>
+        <table class="table custom-table">
+            {% if profile.photo %}
+                <tr style="text-align: left;">
+                    <td><img src="{{ profile.photo.url }}" alt="{{ profile.username }}'s photo"></td>
+                </tr>
+            {% endif %}
+            <tr style="text-align: left;"><td><p>First name : {{ profile.first_name }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>Last name : {{ profile.last_name }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>E-mail address : {{ profile.email }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>Location : {{ profile.location }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>Website : {{ profile.website }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>Phone number : {{ profile.phone_number }}</p></td></tr>
+            <tr style="text-align: left;"><td><p>Biography : {{ profile.biografie }}</p></td></tr>
+        </table>
+        <br><br><br><br>
+        <button><a href="{% url 'main:update' %}" class="btn btn-primary">Edit Profile</a></button>
+    </div>
+</section>
+<section id="right-section">
+    <form>
+    <div style="width: 23.33%; float:left; position: absolute; left: 200px">
+        <form>
+            {% csrf_token %}
+            <input type="number" name="days_from_today" placeholder="Number of days" min="1">
+            <button hx-post="{% url 'main:plan' %}" hx-target="#plan" type="submit">Show Plans</button>
+        </form>
+        <br><br><br>
+        <div id = "plan">
+            {% include "partials/display_plan.html" %}
+        </div>
+    </div> 
+</section>
+</div>
+{% endblock %}
+
+

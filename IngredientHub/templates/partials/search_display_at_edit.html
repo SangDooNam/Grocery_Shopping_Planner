@@ -1,0 +1,19 @@
+{% load recipe %}
+
+{% if results %}
+<br>
+<p>- results -</p>
+<br>
+<table class="table custom-table">
+    <tbody>
+        {% for product in results %}
+            <ul style="text-align: left;">
+                <li><a href="#" hx-put="{% url 'IngredientHub:update_recipe' rec_id=rec_id %}?product_id={{ product.id }}" hx-target="#display_selected_at_edit">{{ product }}</a></li>
+            </ul> 
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <br><br>
+    <p>Nothing found</p>
+{% endif %}

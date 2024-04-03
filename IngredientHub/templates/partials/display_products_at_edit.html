@@ -1,0 +1,22 @@
+{% load recipe %}
+<br><br>
+<div>
+    <table class="table custom-table">
+        <tbody>
+            {% if groceryproducts %}
+                {% for row in groceryproducts|chunks:5 %}
+                    <tr>
+                        {% for groceryproduct in row %}
+                            <td>{{ groceryproduct }}</td>
+                            <td>
+                                <button class="btn btn-danger" hx-put="{% url 'IngredientHub:update_recipe' rec_id=rec_id %}?product_id={{ groceryproduct.id }}" hx-target="#display_selected_at_edit">Add</button>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% else %}
+        </tbody>
+    </table>
+    <p>Please select product.</p>
+    {% endif %}
+</div>

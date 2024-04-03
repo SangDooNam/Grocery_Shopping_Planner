@@ -1,0 +1,153 @@
+
+
+/* *{
+    box-sizing: border-box;
+} */
+
+body {
+	margin: 0;
+	padding: 0;
+	padding-top: 100px;
+	padding-bottom: 60px;
+}
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f9fa;
+	padding: 20px 0;
+	height: 80px;
+	z-index: 1000;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+}
+header h2 {
+	margin: 0; /* Removes default margin from h2 */
+}
+.auth-links {
+	text-align: right;
+	padding: 100px;
+}
+/* main {
+	width: 100%;
+	padding: 20px;
+} */
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f9fa;
+	text-align: center;
+	padding: 20px 0;
+	height: 40px;
+	z-index: 1000;
+	box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+#left-section {
+    width: 23.33%;
+    float: right;
+}
+
+#middle-section {
+    width: 53.33%;
+    float: right;
+}
+
+#right-section {
+    width: 23.33%;
+    float: right;
+}
+
+/* table one */
+
+.custom-table {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.custom-table, .custom-table th, .custom-table td {
+	border: 1px solid black;
+}
+
+.custom-table td {
+	padding: 3px;
+	text-align: left;
+}
+
+/* table two */
+
+.custom-table-two {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+.custom-table-two th {
+	background-color: paleturquoise;
+}
+
+.custom-table-two td {
+	padding: 3px;
+	text-align: left;
+	border: 0.5px solid black;
+}
+
+.custom-table-two tr:nth-child(even) {
+	background-color:mintcream;
+}
+
+/* table three */
+
+.form-container {
+	display: flex;
+	justify-content: center;
+}
+
+#deleteCategoryForm {
+	text-align: left;
+}
+
+#CreateNewsubcategory {
+	text-align: left;
+}
+
+#CreateNewProduct {
+	text-align: left;
+}
+
+.custom-fieldset {
+    min-width: 300px; /* Minimum width of each fieldset */
+    min-height: 180px; /* Minimum height of each fieldset */
+    width: auto; /* Allows fieldset to grow based on content */
+    height: auto; /* Allows fieldset to grow based on content */
+    flex-direction: column; /* Stack the content vertically */
+    justify-content: space-between; /* Distribute space evenly */
+    padding: 20px; /* Add some padding inside the fieldset */
+}
+
+.custom-legend {
+    align-self: start; /* Align the legend to the start of the flex container */
+}
+
+.select-container, .button-container {
+    align-self: stretch; /* Stretch select and button containers to fill the width */
+}
+
+.button-container {
+    margin-top: auto; /* Push the button container to the bottom */
+}
+
+.form-middle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}

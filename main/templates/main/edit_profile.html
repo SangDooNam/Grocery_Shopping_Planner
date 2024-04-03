@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 50vh;">
+    <form method="post">  <!-- Make sure to include the form method and action -->
+        {% csrf_token %}
+        <table style="margin: auto;">
+            {% for field in form %}
+            <tr>
+                <td>{{ field.label_tag }}</td>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div style="margin-top: 20px; justify-content: center; align-items: center;">
+            <input type="submit" value="Submit">
+        </div> <!-- Adjust the margin-top as needed -->
+    </form>
+</div>
+{% endblock %}

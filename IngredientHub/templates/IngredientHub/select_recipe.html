@@ -1,0 +1,72 @@
+<div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+    <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <!-- Form centered within its own flex container -->
+        
+        <form hx-post="{% url 'IngredientHub:select' year=year month_name=month_name %}?day={{ day }}">
+            {% csrf_token %}
+            <table style="margin: auto;">
+                <p>{{ planned_date }}</p>
+                <br><br><br>
+                <tr>
+                    <td>{{ form.breakfast.label_tag }}</td>
+                    <td>{{ form.breakfast }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.lunch.label_tag }}</td>
+                    <td>{{ form.lunch }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.dinner.label_tag }}</td>
+                    <td>{{ form.dinner }}</td>
+                </tr>
+            </table>
+            <br><br>
+            <input type='submit' value='Submit'>
+        </form>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; position: relative; right: 300px;">
+        <!-- Recipes aligned to the right within its flex container -->
+        {% if selected_recipes %}
+            <table class="table custom-table" style="align-items: left;">
+                <p>* You have aleady selected recipes for this day. *</p>
+                <tr>
+                    <th>Meals</th>
+                    <th>Selected recipe name</th>
+                </tr>
+                <tr>
+                    <td>Breakfast</td>
+                    <td>{{ selected_recipes.breakfast }}</td>
+                </tr>
+                <tr>
+                    <td>Lunch</td>
+                    <td>{{ selected_recipes.lunch }}</td>
+                </tr>
+                <tr>
+                    <td>Dinner</td>
+                    <td>{{ selected_recipes.dinner }}</td>
+                </tr>
+            </table>
+        {% else %}
+            <table class="table custom-table">
+                <p>* You haven't selected recipes for this day yet. *</p>
+                <tr>
+                    <th>Meals</th>
+                    <th>Selected recipe name</th>
+                </tr>
+                <tr>
+                    <td>Breakfast</td>
+                    <td style="text-align: center;">{{ selected_recipes.breakfast }}</td>
+                </tr>
+                <tr>
+                    <td>Lunch</td>
+                    <td style="text-align: center;">{{ selected_recipes.lunch }}</td>
+                </tr>
+                <tr>
+                    <td>Dinner</td>
+                    <td style="text-align: center;">{{ selected_recipes.dinner }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </div> 
+</div>
+

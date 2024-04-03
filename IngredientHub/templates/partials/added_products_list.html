@@ -1,0 +1,20 @@
+{% if container %}
+<p>- Selected Ingredients -</p>
+    <table class="table custom-table">
+        <tbody hx-target="closest tr">
+            {% for item in container %}
+                <tr style="text-align: left; font-size: 13px;">
+                    <td style="padding: 5px 5px;">{{ item.name }}</td>
+                    <td>
+                        <button class="btn btn-danger" hx-delete="{% url 'IngredientHub:add' year=year month_name=month_name %}?day={{ day }}&Create_recipe={{ selected_meal_module }}&cat_id={{ item.category_id.id }}&sub_id={{ item.sub_category_id.id }}&ing_id={{ item.id }}&del_id={{ item.id }}">Delete</button>
+                    <td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    <br><br>
+    {{ product_field }}
+{% else %}
+<p>No product is selected.</p>
+{% endif %}

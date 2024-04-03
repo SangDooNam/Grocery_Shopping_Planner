@@ -1,0 +1,20 @@
+{% load recipe %}
+{% if subcategories %}
+    <br>
+    <p>- Subcategory -</p>
+    <br>
+        <table class="table custom-table">
+        {% for row in subcategories|chunks:5 %}
+            <tr style="text-align: left;">
+                {% for subcategory in row %}
+                <td style="padding: 5px 5px;">
+                    <a href="#" hx-get="{% url 'IngredientHub:sub' year=year month_name=month_name %}?day={{ day }}&Create_recipe={{ selected_meal_module }}&cat_id={{ subcategory.parent_category_id.id }}&sub_id={{ subcategory.id }}" hx-target="#displayproduct">{{ subcategory.name }}</a>
+                </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+{% else %}
+    <br><br>
+    <p>Please select a category.</p>
+{% endif %}

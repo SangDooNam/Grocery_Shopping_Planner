@@ -1,0 +1,15 @@
+<div>
+    <form id="deleteProductForm" method="POST" action="{% url 'main:partialproduct' %}">
+        {% csrf_token %}
+        <div>
+            <select name="select_product" id="selectproduct">
+                <option selected>Choose a product to delete</option>
+                {% for product in selected_products %}
+                    <option value="{{ product.id }}">{{ product }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <button type="submit" name="action" value="delete_product">Delete</button>
+    </form>
+</div>

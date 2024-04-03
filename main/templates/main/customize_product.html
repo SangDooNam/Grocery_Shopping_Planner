@@ -1,0 +1,124 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="content-container">
+<section id="left-section">
+    <div>
+        <hr style="border: none; height: 1px; background: transparent;">
+    </div>
+</section>
+<section id="middle-section">
+    <br><br>
+    <div class="form-container">
+        <form id="deleteCategoryForm" method="POST" action="{% url 'main:customize' %}">
+            {% csrf_token %}
+            <fieldset class='custom-fieldset'>
+            <legend class='custom-legend'>Delete a Category</legend>
+                <select name="selected_category" id="category">
+                    <option selected>Choose a category to delete</option>
+                    {% for section in category %}
+                        <option value="{{ section.id }}">{{ section }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <div class="button-container">
+                <button type="submit" name="action" value="delete_category">Delete</button>
+                </div>
+            </fieldset>
+        </form>
+        <br><br>
+            <fieldset class='custom-fieldset'>
+                <legend>Delete a Subcategory</legend>
+                <select name="select_category" id="selectcategory" hx-get="{% url 'main:partialsub' %}" hx-target='#select_subcategory'>
+                    <option selected>Choose a category to find subcategory</option>
+                    {% for section in category %}
+                        <option value="{{ section.id }}">{{ section }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <div id="select_subcategory">
+                    {% include 'partials/subcategory.html' %}
+                </div>
+            </fieldset>
+        <br><br>
+            <fieldset class='custom-fieldset'>
+                <legend>Delete a Product or Igredient</legend>
+                <select name="select_category_second" id="selectcategory_second" hx-get="{% url 'main:partialsub_sec' %}" hx-target='#select_subcategory_second'>
+                    <option selected>Choose a category to find subcategory</option>
+                    {% for section in category %}
+                        <option value="{{ section.id }}">{{ section }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <div id="select_subcategory_second">
+                    {% include 'partials/subcategory_second.html' %}
+                </div>
+            </fieldset>
+    </div>
+    <br><br>
+    <div class="form-container">
+        <fieldset>
+                <legend>Add New Subcategory</legend>
+                <div>
+                    <form id='CreateNewsubcategory' method="POST" action="{% url 'main:customize' %}">
+                        {% csrf_token %}
+                            <div>
+                                <td>{{ form.name }}</td>
+                            </div>
+                            <br>
+                            <div>
+                                <td>{{ form.parent_category_id }}</td>
+                            </div>
+                            <br>
+                            <div>
+                                <input type="submit" name="action" value="Submit">
+                            </div>
+                    </form>
+                </div>
+        </fieldset> 
+        <br><br>
+        <fieldset>
+            <legend>Add New Product or Ingredient</legend>
+            <div id="display-add-product">
+                <form id='CreateNewProduct' method="POST" action="{% url 'main:customize' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Enter product or ingredient name" required style="width: 55%;">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <select name="select_category_third" id="selectcategory_third" hx-get="{% url 'main:partialsub_third' %}" hx-target='#select_subcategory_third'>
+                            <option selected>Choose a category</option>
+                            {% for section in category %}
+                                <option value="{{ section.id }}">{{ section }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div id="select_subcategory_third">
+                        {% include 'partials/subcategory_third.html' %}
+                    </div>
+                    <br>
+                    <div>
+                        <textarea name="description" id="id_description" rows="4" cols="50" placeholder="Enter product or ingredient description"></textarea>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" name="action" value="add_product">Add</button>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+    <br><br>
+</section>
+<section id="right-section">
+    <div>
+        <hr style="border: none; height: 1px; background: transparent;">
+    </div>
+</section>
+</div>
+{% endblock %}
+

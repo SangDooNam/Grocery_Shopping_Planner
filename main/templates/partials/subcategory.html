@@ -1,0 +1,15 @@
+<div>
+    <form id="deleteSubcategoryForm" method="POST" action="{% url 'main:partialsub' %}">
+        {% csrf_token %}
+        <div>
+            <select name="select_subcategory" id="selectsubcategory">
+                <option selected>Choose a subcategory to delete</option>
+                {% for category in selected_subcategories %}
+                    <option value="{{ category.id }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <button type="submit" name="action" value="delete_subcategory">Delete</button>
+    </form>
+</div>

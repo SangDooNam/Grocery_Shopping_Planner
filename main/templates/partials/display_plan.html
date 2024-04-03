@@ -1,0 +1,74 @@
+
+<div>
+    <table class="table custom-table-two">
+        <tr>
+            <th>Date</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+        </tr>
+        {% if meal_plans %}
+            {% for plan in meal_plans %}
+                <tr>
+                    <td>{{ plan.planned_date }}</td>
+                    <td>
+                        {% if plan.breakfast %}
+                            {% for product in plan.breakfast.groceryproducts.all %}
+                                {{ product.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            None
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if plan.lunch %}
+                            {% for product in plan.lunch.groceryproducts.all %}
+                                {{ product.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            None
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if plan.dinner %}
+                            {% for product in plan.dinner.groceryproducts.all %}
+                                {{ product.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            None
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">You don't have any plan yet.</td>
+            </tr>
+        {% endif %}
+    </table>
+    <br><br><br>
+<div>
+<table class="table custom-table-two">
+    <tr>
+        <th><strong>Name of product</strong></th>
+        <th><strong>Frequency of Use</strong></th>
+    </tr>
+    {% if all_products %}
+        {% for key, value in all_products.items %}
+            <tr>
+                <td>
+                    {{ key }}
+                </td>
+                <td style="text-align: center;">
+                    {{ value }}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4">You haven't selected any products yet.</td>
+        </tr>
+    {% endif %}
+</table>
+</div>
+</div>

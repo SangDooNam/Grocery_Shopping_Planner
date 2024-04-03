@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center>
+    <br><br>
+    {{ greeting }}
+    <br><br>
+    {{ today_is }}
+    <br><br>
+    <p>please select a day to create a recipe</p>
+    <br><br>
+    {{ cur_cal|safe }}
+    <br><br>
+    {{ next_cal|safe }}
+    <br><br>
+    {{ next_next_cal|safe }}
+    <br><br>
+    <br><br>
+</center>
+{% endblock %}

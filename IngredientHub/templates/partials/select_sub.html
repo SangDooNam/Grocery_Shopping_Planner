@@ -1,0 +1,23 @@
+{% load recipe %}
+{% if groceryproduct %}
+<br>
+<p>- Grocery products -</p>
+<br>
+<table class="table custom-table">
+    <tbody>
+        {% for row in groceryproduct|chunks:5 %}
+            <tr style="text-align: left;">
+                {% for ingredient in row %}
+                    <td>{{ ingredient.name }}</td>
+                    <td>
+                        <button class="btn btn-danger" hx-post="{% url 'IngredientHub:add' year=year month_name=month_name %}?day={{ day }}&Create_recipe={{ selected_meal_module }}&cat_id={{ ingredient.category_id.id }}&sub_id={{ ingredient.sub_category_id.id }}&ing_id={{ ingredient.id }}" hx-target="#container">Add</button>
+                    </td>
+                {% endfor %}
+            </tr> 
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <br><br>
+    <p>Pleas select a subcategory.</p>
+{% endif %}

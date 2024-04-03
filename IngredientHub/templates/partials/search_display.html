@@ -1,0 +1,20 @@
+{% load recipe %}
+
+
+{% if results %}
+<br>
+<p>- results -</p>
+<br>
+<table class="table custom-table">
+    <tbody>
+        {% for result in results %}
+            <ul style="text-align: left;">
+                <li><a href="#" hx-post="{% url 'IngredientHub:add' year=year month_name=month_name %}?day={{ day }}&cat_id={{ result.category_id.id }}&sub_id={{ result.sub_category_id.id }}&ing_id={{ result.id }}" hx-target="#container">{{ result }}</a></li>
+            </ul> 
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <br><br>
+    <p>Nothing found</p>
+{% endif %}

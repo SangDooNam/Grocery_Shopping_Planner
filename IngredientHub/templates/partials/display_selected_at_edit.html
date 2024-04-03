@@ -1,0 +1,17 @@
+{% load recipe %}
+<div>
+    {% if ingredients %}
+        <p style="text-align: left; font-size: 13px;"><strong>Actual Ingredients :</strong>  click to delete</p>
+        <table class="table custom-table">
+            {% for row in ingredients|chunks:5 %}
+                <tr>
+                    {% for product in row %}
+                        <td><button hx-delete="{% url 'IngredientHub:update_recipe' rec_id=rec_id  %}?del_id={{ product.id }}" hx-target="this">{{ product }}</button></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No product is selected</p>
+    {% endif %}
+</div>

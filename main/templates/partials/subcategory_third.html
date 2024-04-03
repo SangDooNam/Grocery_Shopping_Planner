@@ -1,0 +1,8 @@
+<div>
+    <select name="selected_subcategory" id="selectsubcategory">
+        <option selected>Choose a subcategory</option>
+        {% for category in selected_subcategories_third %}
+            <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+</div>
